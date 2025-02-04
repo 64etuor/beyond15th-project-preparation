@@ -25,7 +25,7 @@
 gantt
 dateFormat  YYYY-MM-DD
 axisFormat  %m/%d
-title 프로젝트 일정 Gantt 차트 (축에서 연도 숨기기)
+title Project Gantt Chart
 
 section 프로젝트 시작
 프로젝트 시작일 :milestone, m1, 2025-02-03, 1d
