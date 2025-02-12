@@ -55,27 +55,25 @@ INSERT INTO `user` (
 VALUES
   -- 1~3번 사용자: 기존대로 authority_id=1,2,3
   ('user01', 1,  'pw01', '01000000001', 'user01@example.com', 25, 'M',
-   'http://example.com/profile/user01.jpg', 1, 1, '휴면',  0, NOW(), NOW(), NULL, 100.00),
+   'http://example.com/profile/user01.jpg', 'N', 'N', '휴면',  0, NOW(), NOW(), NULL, 100.00),
   ('user02', 2,  'pw02', '01000000002', 'user02@example.com', 30, 'F',
-   'http://example.com/profile/user02.jpg', 1, 1, '정지',  1, NOW(), NOW(), NULL, 500.00),
+   'http://example.com/profile/user02.jpg', 'N', 'N', '정지',  1, NOW(), NOW(), NULL, 500.00),
   ('user03', 3,  'pw03', '01000000003', 'user03@example.com', 29, 'M',
-   'http://example.com/profile/user03.jpg', 0, 1, '탈퇴',  2, NOW(), NOW(), NULL, 0.00),
-
-  -- 4번~10번 사용자: 기존에 4~10이었던 authority_id를 1,2,3 중 하나로 재배치
+   'http://example.com/profile/user03.jpg', 'N', 'N', '탈퇴',  2, NOW(), NOW(), NULL, 0.00),
   ('user04', 1,  'pw04', '01000000004', 'user04@example.com', 40, 'F',
-   'http://example.com/profile/user04.jpg', 1, 0, '휴면',  0, NOW(), NOW(), NULL, 250.00),
+   'http://example.com/profile/user04.jpg', 'N', 'N', '휴면',  0, NOW(), NOW(), NULL, 250.00),
   ('user05', 2,  'pw05', '01000000005', 'user05@example.com', 18, 'M',
-   'http://example.com/profile/user05.jpg', 0, 0, '정지',  3, NOW(), NOW(), NULL, 300.00),
+   'http://example.com/profile/user05.jpg', 'N', 'N', '정지',  3, NOW(), NOW(), NULL, 300.00),
   ('user06', 3,  'pw06', '01000000006', 'user06@example.com', 35, 'F',
-   'http://example.com/profile/user06.jpg', 1, 1, '휴면',  0, NOW(), NOW(), NULL, 45.00),
+   'http://example.com/profile/user06.jpg', 'N', 'Y', '휴면',  0, NOW(), NOW(), NULL, 45.00),
   ('user07', 1,  'pw07', '01000000007', 'user07@example.com', 22, 'F',
-   'http://example.com/profile/user07.jpg', 1, 1, '정지',  0, NOW(), NOW(), NULL, 0.00),
+   'http://example.com/profile/user07.jpg', 'N', 'Y', '정지',  0, NOW(), NOW(), NULL, 0.00),
   ('user08', 2,  'pw08', '01000000008', 'user08@example.com', 28, 'M',
-   'http://example.com/profile/user08.jpg', 0, 1, '탈퇴',  4, NOW(), NOW(), NULL, 1000.00),
+   'http://example.com/profile/user08.jpg', 'Y', 'N', '탈퇴',  4, NOW(), NOW(), NULL, 1000.00),
   ('user09', 3,  'pw09', '01000000009', 'user09@example.com', 45, 'M',
-   'http://example.com/profile/user09.jpg', 1, 1, '정지',  0, NOW(), NOW(), NULL, 120.00),
+   'http://example.com/profile/user09.jpg', 'N', 'N', '정지',  0, NOW(), NOW(), NULL, 120.00),
   ('user10', 1,  'pw10', '01000000010', 'user10@example.com', 38, 'F',
-   'http://example.com/profile/user10.jpg', 0, 0, '휴면',  2, NOW(), NOW(), NULL, 999.99);
+   'http://example.com/profile/user10.jpg', 'Y', 'Y', '휴면',  2, NOW(), NOW(), NULL, 999.99);
 
 --
 -- 4. store
