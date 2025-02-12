@@ -1,4 +1,4 @@
-:::mermaid
+```mermaid
 erDiagram
 
     authority {
@@ -213,4 +213,4 @@ erDiagram
     report_type ||--|{ report : classified
     notification_type ||--|{ notification_history : has
 
-:::
+```
