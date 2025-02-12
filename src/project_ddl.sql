@@ -1,4 +1,3 @@
-CREATE DATABASE billon_db;
 -- 외래 키 체크 해제
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -31,8 +30,8 @@ CREATE TABLE `user` (
 -- 2025-02-11 박양하:  ERD와 Type 매칭 TEXT -> VARCHAR(255) DEFAULT 설정 임의 설정 후 Not null로 제약조건  변경)
   `profile_image_url` VARCHAR(255) NOT NULL DEFAULT('https://billon.com/profile_image_test_url/'),
 -- 2025-02-12 박양하: boolean을 ENUM Y,N 으로 처리하기로 했으나 아래 정보제공동의와 알림수신동의가  TINYINT로 선언되어 타입 수정
-  `is_alarm_enabled` ENUM('M','F') NOT NULL DEFAULT('N'),
-  `is_consent_provided` ENUM('M','F') NOT NULL DEFAULT('N'),
+  `is_alarm_enabled` ENUM('Y','N') NOT NULL DEFAULT('N'),
+  `is_consent_provided` ENUM('Y','N') NOT NULL DEFAULT('N'),
   `account_status` ENUM('휴면','탈퇴','정지') NOT NULL,
   `reported_count` INT NOT NULL DEFAULT 0,
   `created_at` TIMESTAMP NOT NULL,
