@@ -30,8 +30,9 @@ CREATE TABLE `user` (
   `gender` ENUM('M','F') NOT NULL,
 -- 2025-02-11 박양하:  ERD와 Type 매칭 TEXT -> VARCHAR(255) DEFAULT 설정 임의 설정 후 Not null로 제약조건  변경)
   `profile_image_url` VARCHAR(255) NOT NULL DEFAULT('https://billon.com/profile_image_test_url/'),
-  `is_alarm_enabled` TINYINT(1) NOT NULL,
-  `is_consent_provided` TINYINT(1) NOT NULL,
+-- 2025-02-12 박양하: boolean을 ENUM Y,N 으로 처리하기로 했으나 아래 정보제공동의와 알림수신동의가  TINYINT로 선언되어 타입 수정
+  `is_alarm_enabled` ENUM('M','F') NOT NULL DEFAULT('N'),
+  `is_consent_provided` ENUM('M','F') NOT NULL DEFAULT('N'),
   `account_status` ENUM('휴면','탈퇴','정지') NOT NULL,
   `reported_count` INT NOT NULL DEFAULT 0,
   `created_at` TIMESTAMP NOT NULL,
@@ -161,13 +162,14 @@ CREATE TABLE `comment` (
   CONSTRAINT `FK_REVIEW_COMMENT` FOREIGN KEY (`review_id`) REFERENCES `review`(`review_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 13. like
--- like는 예약어이므로 백틱(`)으로 감싸야 함
-CREATE TABLE `like` (
+-- 13. review_like
+-- 2025-02-12 박양하: like은 예약어 이므로 review_like으로 테이블명 변경
+
+CREATE TABLE `review_like` (
   `like_id` BIGINT NOT NULL AUTO_INCREMENT,
   `review_id` BIGINT NOT NULL,
   `user_id` VARCHAR(30) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT(NOW()),
   PRIMARY KEY (`like_id`),
   -- 2025-02-11 박양하: UNIQUE 조건 추가(user_id당 하나의 review에 한 번의 좋아요 가능)
   UNIQUE (`review_id`, `user_id`),
@@ -193,12 +195,25 @@ CREATE TABLE `point` (
   `receipt_id` BIGINT NOT NULL,
   `transaction_type` VARCHAR(10) NULL,
   `point` INT NOT NULL,
-  `created_at` TIMESTAMP NOT NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT(NOW()),
   `is_canceled` ENUM('Y','N') NOT NULL,
   PRIMARY KEY (`point_id`),
   CONSTRAINT `FK_USER_POINT` FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`),
   CONSTRAINT `FK_RECEIPT_POINT` FOREIGN KEY (`receipt_id`) REFERENCES `receipt`(`receipt_id`),
   CONSTRAINT `FK_REFERENCE_POINT` FOREIGN KEY (`reference_point_id`) REFERENCES `point`(`point_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 2025-02-12 박양하: 포인트 교환 내역 테이블 추가
+-- 16. point_exchange_history
+CREATE TABLE `point_exchange_history` (
+	  `point_exchange_id` BIGINT NOT NULL AUTO_INCREMENT,
+	  `user_id` VARCHAR(30) NOT NULL,
+	  `point_product_id` BIGINT NOT NULL,
+	  `quantity` INT NOT NULL,
+	  `created_at` TIMESTAMP NOT NULL DEFAULT(NOW()),
+	  PRIMARY KEY (`point_exchange_id`),
+	  CONSTRAINT `FK_USER_EXCHANGE` FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`),
+	  CONSTRAINT `FK_POINT_PRODUCT` FOREIGN KEY (`point_product_id`) REFERENCES `point_product`(`point_product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --  2025-02-12 트랜잭션 관련 테이블 삭제
@@ -249,7 +264,7 @@ CREATE TABLE `login_history` (
   `device_type` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`login_history_id`),
   CONSTRAINT `FK_USER_LOGIN` FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 -- 20. report
 CREATE TABLE `report` (
