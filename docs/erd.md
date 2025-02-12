@@ -30,7 +30,7 @@ erDiagram
         TIMESTAMP created_at
         TIMESTAMP modified_at
         TIMESTAMP deleted_at
-        INT remaining_point
+        FLOAT remaining_point
     }
 
     store {
@@ -44,7 +44,7 @@ erDiagram
         VARCHAR address
         VARCHAR address_detail
         VARCHAR business_hours
-        INT average_rating
+        FLOAT average_rating
         TIMESTAMP created_at
         TIMESTAMP modified_at
         TIMESTAMP deleted_at
@@ -204,12 +204,14 @@ erDiagram
     store ||--|{ review : has
     store ||--|{ favorite : liked
     store ||--|{ store_image : has
+    store ||--|{ receipt : generates
     review ||--|{ comment : has
     review ||--|{ review_like : liked
     review ||--|{ review_image : has
     review ||--|{ report : reported
     comment ||--|{ report : reported
     receipt ||--|{ point : generates
+    receipt ||--|{ card_company : paid_with
     report_type ||--|{ report : classified
     notification_type ||--|{ notification_history : has
 
