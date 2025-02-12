@@ -271,9 +271,9 @@ VALUES
   ('user10',10, '완전 동의합니다!',      NOW(), NOW(), NULL);
 
 --
--- 13. `like`
+-- 13. `review_like`
 --
-INSERT INTO `like` (
+INSERT INTO `review_like` (
   review_id, 
   user_id, 
   created_at
@@ -332,6 +332,20 @@ VALUES
   ('user08', 6,    8,  'redeem', 100, NOW(), 'N'),
   ('user09', NULL, 9,  'earn',   300, NOW(), 'N'),
   ('user10', 8,    10, 'redeem', 500, NOW(), 'N');
+
+-- 2025-02-12 포인트 교환 내역 샘플 데이터 추가
+INSERT INTO `point_exchange_history` (user_id, point_product_id, quantity)
+VALUES
+('test_user1', 1, 2),
+('test_user1', 2, 1),
+('test_user1', 3, 1),
+('test_user2', 1, 3),
+('test_user2', 2, 2),
+('test_user2', 3, 1),
+('test_user3', 1, 1),
+('test_user3', 3, 3),
+('test_user3', 2, 4),
+('test_user1', 2, 5);
 
 --  2025-02-12 트랜잭션 관련 테이블 삭제
 --
